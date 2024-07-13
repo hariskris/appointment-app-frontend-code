@@ -1,27 +1,32 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="javascript:void(0);" routerLink="/">APPOINTMENT BOOKING APP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="javascript:void(0);" routerLink="/">APPOINTMENT BOOKING APP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto"  >
-  
-      <ng-container *ngIf="this.auth.isAuthenticated();then authenticated;else notAuthenticated">
-  
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <!-- Left-aligned items -->
+      <ng-container *ngIf="auth.isAuthenticated(); then authenticated; else notAuthenticated">
       </ng-container>
-  
-        <ng-template #notAuthenticated>
-          <li class="nav-item"><a href="javascript:void(0);" routerLink="/register"  class="nav-link" >Register</a></li>
-          <li><a class="nav-link" href="javascript:void(0);" routerLink="/login" >Login</a></li>
-        </ng-template>
-  
-        <ng-template #authenticated>
-          <li class="nav-item"><a href="javascript:void(0);" routerLink="/dashboard" class="nav-link" >Dashboard</a></li>
-          <li><a class="nav-link" href="javascript:void(0);"  (click)="logout()" >Logout</a></li>
-        </ng-template>
-  
-  
+
+      <ng-template #notAuthenticated>
+        <li class="nav-item"><a href="javascript:void(0);" routerLink="/register" class="nav-link">Register</a></li>
+        <li><a class="nav-link" href="javascript:void(0);" routerLink="/login">Login</a></li>
+      </ng-template>
+
+      <ng-template #authenticated>
+        <li class="nav-item"><a href="javascript:void(0);" routerLink="/dashboard" class="nav-link">Dashboard</a></li>
+      </ng-template>
     </ul>
-  
-    </div>
-  </nav>
+
+    <!-- Right-aligned items -->
+    <ul class="navbar-nav">
+      <li *ngIf="auth.isAuthenticated()">
+        <a class="nav-link" href="javascript:void(0);" (click)="logout()">Logout</a>
+      </li>
+      <li *ngIf="auth.isAuthenticated()">
+        <a class="nav-link" href="javascript:void(0);" (click)="deleteAccount()">Delete Account</a>
+      </li>
+    </ul>
+  </div>
+</nav>

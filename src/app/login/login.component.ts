@@ -25,16 +25,13 @@ export class LoginComponent implements OnInit {
     .subscribe({
         next:data=>{
             //store token
-            this.auth.storeToken(data.idToken);
-            console.log('logged user token is '+data.idToken);
+            this.auth.storeToken(data.token);
+            console.log('logged user token is ',data.token);
             this.auth.canAuthenticate();
         },
         error:data=>{
-            if (data.error.error.message=="INVALID_PASSWORD" || data.error.error.message=="INVALID_EMAIL") {
-                this.errorMessage = "Invalid Credentials!";
-            } else{
-                this.errorMessage = "Unknown error when logging into this account!";
-            }
+            console.error('Login error:', data.error);
+          this.errorMessage = data.error.message || 'Unknown error occurred';
         }
     }).add(()=>{
         this.loading =false;
